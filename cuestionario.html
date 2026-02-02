@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cuestionario</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Unas preguntitas 😌</h1>
+
+<form id="quiz">
+    <p>1️⃣ ¿Te gustan las sorpresas?</p>
+    <label><input type="radio" name="p1" required> Sí</label><br>
+    <label><input type="radio" name="p1"> No</label>
+
+    <p>2️⃣ ¿Pizza o hamburguesa?</p>
+    <label><input type="radio" name="p2" required> Pizza</label><br>
+    <label><input type="radio" name="p2"> Hamburguesa</label>
+
+    <p>3️⃣ ¿Plan tranquilo o aventura?</p>
+    <label><input type="radio" name="p3" required> Tranquilo</label><br>
+    <label><input type="radio" name="p3"> Aventura</label>
+
+    <br><br>
+    <button type="submit">Enviar</button>
+</form>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script type="text/javascript">
+  emailjs.init("rekswt2IaSQDkuH8G"); // Pon tu User ID real
+
+  document.getElementById('quiz').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Obtener respuestas seleccionadas
+      var p1 = this.querySelector('input[name="p1"]:checked').nextSibling.textContent.trim();
+      var p2 = this.querySelector('input[name="p2"]:checked').nextSibling.textContent.trim();
+      var p3 = this.querySelector('input[name="p3"]:checked').nextSibling.textContent.trim();
+
+      var mensaje = `
+      Respuesta 1: ${p1}
+      Respuesta 2: ${p2}
+      Respuesta 3: ${p3}
+      `;
+
+      // Enviar correo usando EmailJS
+      emailjs.send('service_fv78nzg', 'template_0677ffh', { message: mensaje })
+      .then(function() {
+          alert('Correo enviado correctamente!');
+      }, function(error) {
+          alert('Error al enviar el correo: ' + JSON.stringify(error));
+      });
+  });
+</script>
