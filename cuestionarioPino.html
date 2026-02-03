@@ -12,9 +12,14 @@
 <h1>Unas preguntitas 😌</h1>
 
 <form id="quiz">
-    <p>1️⃣ ¿Quieres cenar en el restaurante Sakai?</p>
-    <label class="option"><input type="radio" name="p1" required> Sí</label><br>
-    <label class="option"><input type="radio" name="p1"> No</label>
+    <p>1️⃣ ¿Quieres cenar en el restaurante Vinitus?</p>
+    <label class="option">
+        <input type="radio" name="p1" value="Sí" required> Sí
+    </label><br>
+    <label class="option">
+        <input type="radio" name="p1" value="Otra" id="p1-otra"> Alguna sugerencia 😊:
+        <input type="text" name="p1_text" id="p1_text" placeholder="Escribe tu respuesta" style="display:none;">
+    </label>
 
     <p>2️⃣ ¿A que hora te gustaría cenar?</p>
     <label class="option"><input type="radio" name="p2" required> 21:00</label><br>
@@ -32,13 +37,31 @@
 </form>
 
 <script>
+    // Bloquear opción "No" en la tercera pregunta
     document.getElementById("nofake").addEventListener("click", function (e) {
-    e.preventDefault();      // bloquea la selección
-    this.checked = false;    // por si acaso
-    alert("Esa opción no está disponible 😘");
-});
+        e.preventDefault();
+        this.checked = false;
+        alert("Esa opción no está disponible 😘");
+    });
 
+    // Mostrar campo de texto si eligen "Otra" en la primera pregunta
+    const p1OtraRadio = document.getElementById('p1-otra');
+    const p1Text = document.getElementById('p1_text');
+    const p1Radios = document.querySelectorAll('input[name="p1"]');
+
+    p1Radios.forEach(radio => {
+        radio.addEventListener('change', () => {
+            if (p1OtraRadio.checked) {
+                p1Text.style.display = 'inline-block';
+                p1Text.required = true;
+            } else {
+                p1Text.style.display = 'none';
+                p1Text.required = false;
+            }
+        });
+    });
 </script>
+
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script type="text/javascript">
   emailjs.init("rekswt2IaSQDkuH8G"); // Pon tu User ID real
@@ -46,8 +69,11 @@
   document.getElementById('quiz').addEventListener('submit', function(event) {
       event.preventDefault();
 
-      // Obtener respuestas seleccionadas
-      var p1 = this.querySelector('input[name="p1"]:checked').nextSibling.textContent.trim();
+      // Obtener respuesta de la primera pregunta correctamente
+      var p1_radio = this.querySelector('input[name="p1"]:checked');
+      var p1 = p1_radio.value === "Otra" ? this.querySelector('input[name="p1_text"]').value : p1_radio.value;
+
+      // Obtener respuestas de la segunda y tercera pregunta
       var p2 = this.querySelector('input[name="p2"]:checked').nextSibling.textContent.trim();
       var p3 = this.querySelector('input[name="p3"]:checked').nextSibling.textContent.trim();
 
@@ -58,11 +84,18 @@
       `;
 
       // Enviar correo usando EmailJS
-      emailjs.send('service_fv78nzg', 'template_0677ffh', { message: mensaje })
+      emailjs.send('service_fv78nzg', 'template_6xuvxfb', { 
+        message: mensaje,
+        to_email: 'jpinosimon@gmail.com' 
+      })
       .then(function() {
           alert('Respuestas enviadas correctamente!✨');
+          document.getElementById('quiz').reset();
+          p1Text.style.display = 'none'; // ocultar cajetín después de enviar
       }, function(error) {
           alert('Error al enviar el correo: ' + JSON.stringify(error));
       });
   });
 </script>
+</body>
+</html>
