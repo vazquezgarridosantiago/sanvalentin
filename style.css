@@ -22,3 +22,12 @@ button {
 #noBtn {
     position: absolute;
 }
+
+.fake-no {
+    cursor: not-allowed;
+}
+
+.fake-no input {
+    cursor: not-allowed;
+}
+

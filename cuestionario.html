@@ -10,22 +10,33 @@
 <h1>Unas preguntitas 😌</h1>
 
 <form id="quiz">
-    <p>1️⃣ ¿Te gustan las sorpresas?</p>
+    <p>1️⃣ ¿Quieres cenar en el restaurante Sakai?</p>
     <label><input type="radio" name="p1" required> Sí</label><br>
     <label><input type="radio" name="p1"> No</label>
 
-    <p>2️⃣ ¿Pizza o hamburguesa?</p>
-    <label><input type="radio" name="p2" required> Pizza</label><br>
-    <label><input type="radio" name="p2"> Hamburguesa</label>
+    <p>2️⃣ ¿A que hora te gustaría cenar?</p>
+    <label><input type="radio" name="p2" required> 21:00</label><br>
+    <label><input type="radio" name="p2"> 21:30</label>
+    <label><input type="radio" name="p2"> La que tu kiera wapo</label>
 
-    <p>3️⃣ ¿Plan tranquilo o aventura?</p>
-    <label><input type="radio" name="p3" required> Tranquilo</label><br>
-    <label><input type="radio" name="p3"> Aventura</label>
+    <p>3️⃣ ¿Quieres "dormir" conmigo después de la cena 😏?</p>
+    <label><input type="radio" name="p3" required> Si</label><br>
+    <label class="fake-no" id="nofake">
+        <input type="radio" name="p3"> No
+    </label>
 
     <br><br>
     <button type="submit">Enviar</button>
 </form>
 
+<script>
+    document.getElementById("nofake").addEventListener("click", function (e) {
+    e.preventDefault();      // bloquea la selección
+    this.checked = false;    // por si acaso
+    alert("Esa opción no está disponible 😘");
+});
+
+</script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script type="text/javascript">
   emailjs.init("rekswt2IaSQDkuH8G"); // Pon tu User ID real
