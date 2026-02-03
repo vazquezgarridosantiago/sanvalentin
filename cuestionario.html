@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
 <head>
     <meta charset="UTF-8">
     <title>Cuestionario</title>
@@ -11,17 +13,17 @@
 
 <form id="quiz">
     <p>1️⃣ ¿Quieres cenar en el restaurante Sakai?</p>
-    <label><input type="radio" name="p1" required> Sí</label><br>
-    <label><input type="radio" name="p1"> No</label>
+    <label class="option"><input type="radio" name="p1" required> Sí</label><br>
+    <label class="option"><input type="radio" name="p1"> No</label>
 
     <p>2️⃣ ¿A que hora te gustaría cenar?</p>
-    <label><input type="radio" name="p2" required> 21:00</label><br>
-    <label><input type="radio" name="p2"> 21:30</label>
-    <label><input type="radio" name="p2"> La que tu kiera wapo</label>
+    <label class="option"><input type="radio" name="p2" required> 21:00</label><br>
+    <label class="option"><input type="radio" name="p2"> 21:30</label><br>
+    <label class="option"><input type="radio" name="p2"> La que tu kiera wapo</label>
 
     <p>3️⃣ ¿Quieres "dormir" conmigo después de la cena 😏?</p>
-    <label><input type="radio" name="p3" required> Si</label><br>
-    <label class="fake-no" id="nofake">
+    <label class="option"><input type="radio" name="p3" required> Si</label><br>
+    <label class="option" id="nofake">
         <input type="radio" name="p3"> No
     </label>
 
@@ -58,7 +60,7 @@
       // Enviar correo usando EmailJS
       emailjs.send('service_fv78nzg', 'template_0677ffh', { message: mensaje })
       .then(function() {
-          alert('Correo enviado correctamente!');
+          alert('Respuestas enviadas correctamente!✨');
       }, function(error) {
           alert('Error al enviar el correo: ' + JSON.stringify(error));
       });

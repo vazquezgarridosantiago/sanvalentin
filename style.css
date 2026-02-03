@@ -31,3 +31,32 @@ button {
     cursor: not-allowed;
 }
 
+/* Opciones del formulario */
+.opcion {
+    display: block;
+    font-size: 1.1rem;
+    margin: 10px 0;
+}
+
+/* 📱 Ajustes SOLO para móvil */
+@media (max-width: 600px) {
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    p {
+        font-size: 1.1rem;
+    }
+
+    button {
+        width: 100%;
+        font-size: 1.3rem;
+    }
+
+    input[type="radio"] {
+        transform: scale(1.3);
+        margin-right: 8px;
+    }
+}
+
